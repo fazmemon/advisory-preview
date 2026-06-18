@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Faz Memon — AI that actually ships</title>
+<style>
+  :root{
+    --ink:#16181d; --muted:#5b6168; --line:#e6e3dc; --paper:#faf8f4;
+    --accent:#1f5c4d; --accent-soft:#eef3f0;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font:17px/1.62 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:0 24px}
+  header{padding:72px 0 8px}
+  .eyebrow{font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin:0 0 18px}
+  h1{font-size:40px; line-height:1.12; letter-spacing:-.02em; margin:0 0 18px; font-weight:680}
+  h1 .q{color:var(--accent)}
+  .lede{font-size:21px; line-height:1.5; color:#34383f; margin:0 0 14px}
+  section{padding:34px 0; border-top:1px solid var(--line)}
+  h2{font-size:14px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin:0 0 16px; font-weight:600}
+  h3{font-size:20px; margin:0 0 8px; letter-spacing:-.01em}
+  p{margin:0 0 14px}
+  .muted{color:var(--muted)}
+  strong{font-weight:640}
+  ul{margin:0 0 14px; padding:0 0 0 20px}
+  li{margin:0 0 7px}
+  .pull{font-size:22px; line-height:1.45; letter-spacing:-.01em; color:var(--ink); border-left:3px solid var(--accent); padding-left:18px; margin:4px 0 0}
+  .rungs{display:grid; gap:14px; margin-top:4px}
+  .rung{border:1px solid var(--line); border-radius:10px; padding:18px 20px; background:#fff}
+  .rung .top{display:flex; justify-content:space-between; align-items:baseline; gap:14px; margin-bottom:4px}
+  .rung .name{font-size:18px; font-weight:620}
+  .rung .price{font-size:18px; font-weight:620; color:var(--accent); white-space:nowrap}
+  .steps{counter-reset:s; list-style:none; padding:0; margin:6px 0 0}
+  .steps li{counter-increment:s; position:relative; padding:0 0 9px 34px}
+  .steps li::before{content:counter(s); position:absolute; left:0; top:-1px; width:23px; height:23px;
+    background:var(--accent-soft); color:var(--accent); border-radius:50%; font-size:13px; font-weight:700;
+    display:flex; align-items:center; justify-content:center}
+  .tag{display:inline-block; font-size:12px; color:var(--muted); border:1px solid var(--line);
+    border-radius:20px; padding:1px 9px; margin-left:6px; vertical-align:middle; letter-spacing:.02em}
+  .hard{background:var(--accent-soft); border:1px solid #d6e2dc; border-radius:10px; padding:16px 20px}
+  .hard strong{color:var(--accent)}
+  footer{padding:40px 0 80px; color:var(--muted); font-size:15px}
+  a{color:var(--accent)}
+  .draftbar{background:#fff4d6; border-bottom:1px solid #e8d9a8; color:#6b5a1f; font-size:13px;
+    text-align:center; padding:7px 12px}
+</style>
+</head>
+<body>
+<div class="draftbar">Private working draft — not published. For Faz to read &amp; iterate.</div>
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">Faz Memon · netfm.co.uk</p>
+    <h1>Most people get rubbish out of AI. The difference isn't the AI — <span class="q">it's the harness around it.</span></h1>
+    <p class="lede">A harness is the setup that keeps AI on track: it gives the work structure, holds the context, checks the output, and stops it making things up. I've built one that ships real products. I'll build one for your business, show your team how to run it, and leave you the guidelines to keep going.</p>
+    <p class="pull">It's not magic and it's not foolproof. You still iterate — try it, check it, adjust. But with a harness you get reliable output instead of slop, and you own the system afterwards.</p>
+  </header>
+
+  <section>
+    <h2>It's not magic</h2>
+    <p>AI gets things wrong. The harness is what catches that — but you still have to iterate: run it, check it, adjust. It's not a machine you switch on and walk away from. So I don't just hand you the harness — I hand you the <strong>guidelines that make it safe to run</strong>: when to trust the output and when not to, what good looks like versus slop, the checks that catch mistakes, when to stop and ask a person, and how to iterate. Anyone who tells you AI just works hasn't shipped anything real with it.</p>
+  </section>
+
+  <section>
+    <h2>The way in — automate the right work</h2>
+    <p>Most automation fails because people automate the <strong>wrong</strong> things — a bot shop builds whatever you point at and you get no return. The hard part is choosing what's worth it. That's the judgment I owned running network automation for a Tier-1 telco.</p>
+    <p>So the first step is simple: <strong>I find one automation actually worth doing, build it through the system, and hand that system to your team.</strong> Use-case judgment plus a machine you keep — not bot-building.</p>
+  </section>
+
+  <section>
+    <h2>Who this is for</h2>
+    <p>A 5–100 person business that does real knowledge work, where the owner or head of ops:</p>
+    <ul>
+      <li>already uses ChatGPT/Claude, but the output is inconsistent and nobody trusts it;</li>
+      <li>has <strong>one repeated, valuable output</strong> they need every week or month — reports, proposals, research, customer responses, analysis;</li>
+      <li>has <strong>one capable person</strong> who can own the system after I hand it over.</li>
+    </ul>
+    <p class="muted">Not for: people who just want a magic chatbot, or a team with nobody to own it afterwards.</p>
+  </section>
+
+  <section>
+    <h2>Why me</h2>
+    <p>I've shipped real products with this exact system, and I'll show you:</p>
+    <ul>
+      <li><strong>Chip Adviser</strong> — a live, public AI product <span class="tag">live · built with a partner</span></li>
+      <li><strong>A private trading system</strong> — runs daily on real data <span class="tag">private</span></li>
+      <li><strong>An AI marketer</strong> <span class="tag">in development</span> &nbsp;and a <strong>property-sourcing tool</strong> <span class="tag">early</span></li>
+    </ul>
+    <p>The difference isn't prompting — it's the <strong>harness</strong>: a board the AI agents work to, a memory that doesn't rot, agents that check each other's work, and hard gates that catch the AI making things up. It's the same harness that got me designated <strong>AI-native at Meta</strong> — delivering all my work through AI when most couldn't.</p>
+  </section>
+
+  <section>
+    <h2>What you actually get</h2>
+    <p>A working <strong>board</strong> for your real workflow · a <strong>memory</strong> structure · <strong>agent roles</strong> · <strong>anti-fabrication gates</strong> · review rules · a <strong>finished first output</strong> on your real task · a <strong>runbook</strong> · and a handover test that proves your person can run the next cycle.</p>
+  </section>
+
+  <section>
+    <h2>How to work with me</h2>
+    <div class="rungs">
+      <div class="rung">
+        <div class="top"><span class="name">See it work</span><span class="price">£2,500</span></div>
+        <p class="muted" style="margin:0">I run your system on one real output you need, and leave a runbook. A real output — not a demo, not a talk.</p>
+      </div>
+      <div class="rung">
+        <div class="top"><span class="name">Install it for your team</span><span class="price">£6,000</span></div>
+        <p class="muted" style="margin:0">The full system, set up for one team and one recurring output, with your owner trained to run it.</p>
+      </div>
+      <div class="rung">
+        <div class="top"><span class="name">Run a real project through it</span><span class="price">£12,000</span></div>
+        <p class="muted" style="margin:0">One real project end-to-end, with a tested handover and a reusable operating pack your team keeps.</p>
+      </div>
+    </div>
+    <p class="muted" style="margin-top:14px">Ex-VAT, fixed price, on a free 25-minute call. Every job is scoped to one workflow, one output, one owner — that's what keeps it a fixed price, not an open-ended bill.</p>
+  </section>
+
+  <section>
+    <h2>The handover is a pass/fail — that's the guarantee</h2>
+    <p>Judgment doesn't transfer just because a board exists. So you don't take my word that your team can run it — they prove it:</p>
+    <ol class="steps">
+      <li>We pick one real recurring output.</li>
+      <li>I run cycle 1, narrating every decision.</li>
+      <li>Your owner runs cycle 2 — I only step in at the gates.</li>
+      <li>Your owner runs cycle 3 alone, from the runbook.</li>
+      <li>Handover completes only if cycle 3 passes the acceptance checklist.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Token-aware by design</h2>
+    <p>Running multi-agent AI burns tokens fast. I ran AI delivery at hyperscaler scale, so the system is built to be cost-aware from the start: a budget per task, kill-switches for runaway loops, cheap/expensive model routing, and a simple "is this iteration worth it?" check. <strong>Real output without the runaway bill.</strong></p>
+  </section>
+
+  <section>
+    <h2>RAG, skills, MCP — I use the modern stack where it earns its keep</h2>
+    <p>I'm a hands-on user of these, not a sceptic. I run on <strong>skills</strong> every day. <strong>RAG</strong> — a searchable "second brain" over your own documents — is often the right move, and I'll build it where it helps. I skip the parts that don't earn their keep. The value is knowing <strong>which to build and which to skip</strong> — from using them, not from the hype.</p>
+  </section>
+
+  <section>
+    <div class="hard">
+      <p style="margin:0"><strong>One hard rule: no maintenance, no retainer, no being on-call.</strong> I set it up, prove your team can run it, and leave. You own it.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>Faz Memon · netfm.co.uk · a 25-minute scoping call is free.</p>
+  </footer>
+
+</div>
+</body>
+</html>
