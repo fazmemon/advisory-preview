@@ -4,119 +4,90 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Faz Memon — getting businesses to actually use AI</title>
+<title>Faz Memon — real products with AI</title>
 <style>
-  :root{
-    --ink:#16181d; --muted:#5b6168; --line:#e6e3dc; --paper:#faf8f4;
-    --accent:#1f5c4d; --accent-soft:#eef3f0;
-  }
+  :root{--ink:#16181d; --muted:#5b6168; --line:#e6e3dc; --paper:#faf8f4; --accent:#1f5c4d; --soft:#eef3f0; --card:#fff;}
   *{box-sizing:border-box}
-  html{-webkit-text-size-adjust:100%}
   body{margin:0; background:var(--paper); color:var(--ink);
-    font:17px/1.62 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
-    -webkit-font-smoothing:antialiased;}
-  .wrap{max-width:760px; margin:0 auto; padding:0 24px}
-  header{padding:72px 0 8px}
-  .eyebrow{font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin:0 0 18px}
-  h1{font-size:38px; line-height:1.14; letter-spacing:-.02em; margin:0 0 18px; font-weight:680}
-  h1 .q{color:var(--accent)}
-  .lede{font-size:20px; line-height:1.5; color:#34383f; margin:0 0 14px}
-  section{padding:34px 0; border-top:1px solid var(--line)}
-  h2{font-size:14px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin:0 0 16px; font-weight:600}
-  p{margin:0 0 14px}
-  .muted{color:var(--muted)}
-  strong{font-weight:640}
-  ul{margin:0 0 14px; padding:0 0 0 20px}
-  li{margin:0 0 7px}
-  .rungs{display:grid; gap:14px; margin-top:4px}
-  .rung{border:1px solid var(--line); border-radius:10px; padding:18px 20px; background:#fff}
-  .rung .top{display:flex; justify-content:space-between; align-items:baseline; gap:14px; margin-bottom:4px}
-  .rung .name{font-size:18px; font-weight:620}
-  .rung .price{font-size:18px; font-weight:620; color:var(--accent); white-space:nowrap}
-  .steps{counter-reset:s; list-style:none; padding:0; margin:6px 0 0}
-  .steps li{counter-increment:s; position:relative; padding:0 0 9px 34px}
-  .steps li::before{content:counter(s); position:absolute; left:0; top:-1px; width:23px; height:23px;
-    background:var(--accent-soft); color:var(--accent); border-radius:50%; font-size:13px; font-weight:700;
-    display:flex; align-items:center; justify-content:center}
-  .tag{display:inline-block; font-size:12px; color:var(--muted); border:1px solid var(--line);
-    border-radius:20px; padding:1px 9px; margin-left:6px; vertical-align:middle; letter-spacing:.02em}
-  .hard{background:var(--accent-soft); border:1px solid #d6e2dc; border-radius:10px; padding:16px 20px}
-  .hard strong{color:var(--accent)}
-  footer{padding:40px 0 80px; color:var(--muted); font-size:15px}
-  a{color:var(--accent)}
-  .draftbar{background:#fff4d6; border-bottom:1px solid #e8d9a8; color:#6b5a1f; font-size:13px;
-    text-align:center; padding:7px 12px}
+    font:17px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:880px; margin:0 auto; padding:0 24px}
+  header{padding:70px 0 10px}
+  .eyebrow{font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin:0 0 16px}
+  h1{font-size:34px; line-height:1.16; letter-spacing:-.02em; margin:0 0 16px; font-weight:680}
+  .lede{font-size:19px; line-height:1.5; color:#34383f; margin:0; max-width:680px}
+  section{padding:36px 0; border-top:1px solid var(--line)}
+  h2{font-size:14px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin:0 0 20px; font-weight:600}
+  p{margin:0 0 12px} .muted{color:var(--muted)} strong{font-weight:640} a{color:var(--accent)}
+  .grid{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+  .card{border:1px solid var(--line); border-radius:11px; padding:18px 20px; background:var(--card)}
+  .card h3{font-size:17px; margin:0 0 6px; letter-spacing:-.01em}
+  .card p{font-size:15px; line-height:1.5; color:#3c4047; margin:0}
+  .tag{display:inline-block; font-size:11.5px; color:var(--muted); border:1px solid var(--line); border-radius:20px; padding:1px 9px; margin-left:6px; vertical-align:middle; letter-spacing:.02em}
+  .rungs{display:grid; gap:10px}
+  .rung{display:flex; justify-content:space-between; gap:16px; border-bottom:1px solid var(--line); padding:0 0 10px}
+  .rung:last-child{border-bottom:none}
+  .rung .price{color:var(--accent); font-weight:620; white-space:nowrap}
+  .creds{columns:2; column-gap:28px; font-size:15px; color:#3c4047}
+  .creds div{margin:0 0 7px; break-inside:avoid}
+  .agent{background:var(--soft); border:1px solid #d6e2dc; border-radius:11px; padding:20px 22px}
+  footer{padding:36px 0 80px; color:var(--muted); font-size:15px}
+  .draftbar{background:#fff4d6; border-bottom:1px solid #e8d9a8; color:#6b5a1f; font-size:13px; text-align:center; padding:7px 12px}
+  .note{font-size:13px; color:var(--muted); font-style:italic}
+  .who{font-size:13px; color:var(--accent); margin:9px 0 0}
+  @media(max-width:620px){.grid{grid-template-columns:1fr} .creds{columns:1}}
 </style>
 </head>
 <body>
-<div class="draftbar">Private working draft — not published. For Faz to red-pen.</div>
+<div class="draftbar">Private working draft — PORTFOLIO with everything in, for Faz to cut down (via negativa). Not published.</div>
 <div class="wrap">
 
   <header>
     <p class="eyebrow">Faz Memon · netfm.co.uk</p>
-    <h1>I got businesses onto the internet in the 1990s. <span class="q">I'm back to get them actually using AI.</span></h1>
-    <p class="lede">Back then I'd sit with the one person you put forward and teach them to send their first email. I spent the next 25 years building the internet itself, and at Meta I was rated AI-native. Same moment, new technology. I get your business producing real, reliable work with AI — and I leave one of your people able to run it without me.</p>
+    <h1>I build real products with AI — and get businesses using it.</h1>
+    <p class="lede">I connected small businesses to the internet in the 1990s, spent 25 years building the networks it runs on, and at Meta was rated AI-native. Now I do the same for AI: get a business producing real, reliable work with it — and leave their people able to run it.</p>
   </header>
 
   <section>
-    <h2>What you actually get</h2>
-    <p>One piece of work your team needs, produced reliably by AI: a report, a proposal, research, customer replies, or an assistant that answers from your own documents. <strong>Not "an AI system" to figure out — a working output</strong>, and your person able to produce the next one.</p>
-  </section>
-
-  <section>
-    <h2>How to work with me</h2>
-    <div class="rungs">
-      <div class="rung">
-        <div class="top"><span class="name">One output</span><span class="price">£2,500</span></div>
-        <p class="muted" style="margin:0">Bring one repeated thing your team needs. In about a week I set my system up around it, produce the first one with you, and your nominated person passes a handover run before I leave.</p>
-      </div>
-      <div class="rung">
-        <div class="top"><span class="name">One recurring workflow</span><span class="price">£6,000</span></div>
-        <p class="muted" style="margin:0">The full setup for something you run every week or month — your owner trained and handed it over.</p>
-      </div>
-      <div class="rung">
-        <div class="top"><span class="name">One end-to-end project</span><span class="price">£12,000</span></div>
-        <p class="muted" style="margin:0">A whole project run through, plus a reusable pack and an acceptance test your team keeps.</p>
-      </div>
+    <h2>What I've built</h2>
+    <div class="grid">
+      <div class="card"><h3>Chip Adviser <span class="tag">live</span></h3><p>A live, public AI product — an AI-curated local guide, built and run end-to-end with a partner. Real users, real reviews.</p><p class="who">For: anyone who wants a real, finished AI product shipped — not a prototype.</p></div>
+      <div class="card"><h3>Multi-agent trading system <span class="tag">demo</span></h3><p>A live trading platform I built and run, shown here as a <strong>runnable, fully-synthetic demo</strong> (fake data, no real strategy): signals → risk → allocation, several agents under one coordinator. Proves end-to-end orchestration safely.</p><p class="who">For: any business with a complex, multi-step process that needs many AI steps coordinated reliably.</p></div>
+      <div class="card"><h3>AI digital marketer <span class="tag">in dev</span></h3><p>Software that takes a business → offer → landing page → ad angles → leads → feedback → better angles.</p><p class="who">For: small businesses that need marketing but can't afford or trust an agency.</p></div>
+      <div class="card"><h3>Property sourcing tool <span class="tag">early</span></h3><p>AI that values flats from the floor-plan and photos (condition, floor-area), flags hidden defects (on the tracks, busy road), and finds genuinely under-priced stock.</p><p class="who">For: property investors and sourcers — and anyone grading or valuing from images and documents.</p></div>
+      <div class="card"><h3>Grounded knowledge assistant (RAG) <span class="tag">demo</span></h3><p>Answers from a specific set of documents, cites its sources, and says "not in the material" instead of making things up. Built and working.</p><p class="who">For: healthcare, law firms, finance — any regulated or document-heavy business whose staff need trustworthy answers from their own files.</p></div>
+      <div class="card"><h3>The operating system <span class="tag">the method</span></h3><p>How I get reliable output from AI at all: a work board, a memory that doesn't drift, agents that check each other, and hard anti-fabrication gates. The engine under everything here.</p><p class="who">For: any business that wants AI to produce work it can actually trust.</p></div>
+      <div class="card"><h3>Network performance analytics <span class="tag">Meta-grade</span></h3><p>Measurement pipelines and causal analysis (did a change actually work?), geographic anomaly detection, one-click analysis tools — rigorous, data-backed work applied to a business's own questions. <span class="note">(capability, no client specifics)</span></p><p class="who">For: any business that needs to know whether a decision or change actually moved the needle.</p></div>
+      <div class="card"><h3>Carrier networks, 25 years <span class="tag">career</span></h3><p>Built the Tier-1 networks the internet runs on: Sky UK re-architecture, Liberty Global's Tier-1 backbone, a world-first 3G rollout at Three, plus Nokia/Deutsche Telekom and KPN.</p></div>
     </div>
-    <p class="muted" style="margin-top:14px">Ex-VAT, fixed price, on a free 25-minute call. Always scoped to one workflow, one output, one owner.</p>
+    <p class="note" style="margin-top:14px">Everything's in so you can see the full set and cut — tell me which to drop, merge, or play down.</p>
   </section>
 
   <section>
-    <h2>Your person runs it — and proves it before I leave</h2>
-    <p>Same as the internet: every business I set up had one person who became the one who knew it. Here it's your "AI person." They don't take my word that it works — they run it themselves and pass a check before I'm done:</p>
-    <ol class="steps">
-      <li>We pick one real piece of work.</li>
-      <li>I run it once, talking through every decision.</li>
-      <li>Your person runs it again — I only step in at the checks.</li>
-      <li>Your person runs it alone, from the written guide.</li>
-      <li>It's only "handed over" once that solo run passes.</li>
-    </ol>
+    <h2>Background</h2>
+    <div class="creds">
+      <div><strong>CCIE</strong> #5897 · <strong>JNCIE-SP</strong> #847</div>
+      <div>25 years building carrier / Tier-1 networks</div>
+      <div>Meta — rated <strong>AI-native</strong></div>
+      <div>Set up small businesses on the internet in the 1990s</div>
+    </div>
   </section>
 
   <section>
-    <h2>What you keep</h2>
-    <p>The reason the output stays reliable is the setup I leave underneath it: a board the AI works to, a memory that doesn't drift, and checks that catch it making things up. <strong>That setup is yours.</strong> It runs without me, and you're not tied to anyone — not even me.</p>
+    <h2>How I work</h2>
+    <p>I take one real piece of work your team needs, set up my system to produce it reliably, and hand it over so your nominated person can run it without me. No maintenance, no retainer — you own it.</p>
+    <div class="rungs">
+      <div class="rung"><span>One output, produced and handed over</span><span class="price">£2,500</span></div>
+      <div class="rung"><span>One recurring workflow, full setup + owner handover</span><span class="price">£6,000</span></div>
+      <div class="rung"><span>One end-to-end project + a reusable pack your team keeps</span><span class="price">£12,000</span></div>
+    </div>
+    <p class="note" style="margin-top:12px">Ex-VAT, fixed, on a free 25-minute call.</p>
   </section>
 
   <section>
-    <h2>Why me</h2>
-    <ul>
-      <li>I connected small businesses to the internet in the <strong>1990s</strong> and taught their people to use it.</li>
-      <li><strong>25 years</strong> building the networks the internet runs on (Sky, Liberty Global, Three, Meta).</li>
-      <li>At <strong>Meta</strong>, rated AI-native — I deliver my own work through AI.</li>
-      <li>I've shipped real products this way: <strong>Chip Adviser</strong> <span class="tag">live · built with a partner</span>, a <strong>private trading system</strong> <span class="tag">private</span>, an <strong>AI marketer</strong> <span class="tag">in dev</span>.</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>When it's not for you</h2>
-    <p>I'll tell you straight if it's not a fit: if there's nobody who can take it over, if you just want a chatbot that magically does everything, or if you want me to run it for you forever. That's not what this is.</p>
-  </section>
-
-  <section>
-    <div class="hard">
-      <p style="margin:0"><strong>I set it up, prove your person can run it, and leave.</strong> No maintenance, no retainer, no being on-call. You own it.</p>
+    <h2>Ask me</h2>
+    <div class="agent">
+      <p style="margin:0 0 8px"><strong>A live assistant, trained on my work.</strong> Ask it what I've built, how I work, whether your problem fits — it answers from the facts and draws the line when something becomes paid work. It's also a small live demo of the thing I do.</p>
+      <p class="note" style="margin:0">[ Coming back in — needs a small backend, not on this static draft. The earlier version (serve.py) is the starting point. ]</p>
     </div>
   </section>
 
