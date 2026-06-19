@@ -4,95 +4,173 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Faz Memon — real products with AI</title>
+<title>netfm — AI &amp; network advisory</title>
 <style>
-  :root{--ink:#16181d; --muted:#5b6168; --line:#e6e3dc; --paper:#faf8f4; --accent:#1f5c4d; --soft:#eef3f0; --card:#fff;}
+  :root{
+    --paper:#f4f2ec; --panel:#efece2; --ink:#1b1a16; --ink2:#33312b;
+    --muted:#6f695d; --faint:#928c7e; --line:#ddd8cb; --line2:#e8e4d9;
+    --acc:#c15f3c; --acc-d:#a44c2d; --acc-soft:#f3e3da; --navy:#16304a; --card:#fbfaf5;
+  }
   *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
   body{margin:0; background:var(--paper); color:var(--ink);
-    font:17px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; -webkit-font-smoothing:antialiased;}
-  .wrap{max-width:880px; margin:0 auto; padding:0 24px}
-  header{padding:70px 0 10px}
-  .eyebrow{font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin:0 0 16px}
-  h1{font-size:34px; line-height:1.16; letter-spacing:-.02em; margin:0 0 16px; font-weight:680}
-  .lede{font-size:19px; line-height:1.5; color:#34383f; margin:0; max-width:680px}
-  section{padding:36px 0; border-top:1px solid var(--line)}
-  h2{font-size:14px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin:0 0 20px; font-weight:600}
-  p{margin:0 0 12px} .muted{color:var(--muted)} strong{font-weight:640} a{color:var(--accent)}
-  .grid{display:grid; grid-template-columns:1fr 1fr; gap:14px}
-  .card{border:1px solid var(--line); border-radius:11px; padding:18px 20px; background:var(--card)}
-  .card h3{font-size:17px; margin:0 0 6px; letter-spacing:-.01em}
-  .card p{font-size:15px; line-height:1.5; color:#3c4047; margin:0}
-  .tag{display:inline-block; font-size:11.5px; color:var(--muted); border:1px solid var(--line); border-radius:20px; padding:1px 9px; margin-left:6px; vertical-align:middle; letter-spacing:.02em}
-  .rungs{display:grid; gap:10px}
-  .rung{display:flex; justify-content:space-between; gap:16px; border-bottom:1px solid var(--line); padding:0 0 10px}
-  .rung:last-child{border-bottom:none}
-  .rung .price{color:var(--accent); font-weight:620; white-space:nowrap}
-  .creds{columns:2; column-gap:28px; font-size:15px; color:#3c4047}
-  .creds div{margin:0 0 7px; break-inside:avoid}
-  .agent{background:var(--soft); border:1px solid #d6e2dc; border-radius:11px; padding:20px 22px}
-  footer{padding:36px 0 80px; color:var(--muted); font-size:15px}
-  .draftbar{background:#fff4d6; border-bottom:1px solid #e8d9a8; color:#6b5a1f; font-size:13px; text-align:center; padding:7px 12px}
-  .note{font-size:13px; color:var(--muted); font-style:italic}
-  .who{font-size:13px; color:var(--accent); margin:9px 0 0}
-  @media(max-width:620px){.grid{grid-template-columns:1fr} .creds{columns:1}}
+    font:17px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif; -webkit-font-smoothing:antialiased;}
+  .serif{font-family:"Tiempos Headline",Georgia,"Times New Roman",serif}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 30px}
+  a{color:var(--acc); text-decoration:none} a:hover{text-decoration:underline}
+  nav.top{position:sticky; top:0; z-index:10; border-bottom:1px solid var(--line2); background:rgba(244,242,236,.82); backdrop-filter:saturate(140%) blur(10px)}
+  nav.top .wrap{display:flex; align-items:center; justify-content:space-between; padding:16px 30px}
+  .brand{font-weight:800; letter-spacing:-.02em; font-size:19px; color:var(--ink)} .brand b{color:var(--acc)}
+  nav .links{display:flex; gap:26px; font-size:15px}
+  nav .links a{color:var(--muted)} nav .links a:hover{color:var(--ink); text-decoration:none}
+  nav .links a.active{color:var(--ink); font-weight:600}
+  @media(max-width:780px){nav .links{display:none}}
+  .hero{padding:92px 0 70px; max-width:920px}
+  .eyebrow{font-size:13px; letter-spacing:.16em; text-transform:uppercase; color:var(--acc); font-weight:700; margin:0 0 24px}
+  h1{font-size:clamp(40px,6vw,66px); line-height:1.06; letter-spacing:-.02em; font-weight:560; margin:0 0 26px; color:var(--ink)}
+  .lede{font-size:20px; line-height:1.6; color:var(--ink2); margin:0 0 34px; max-width:720px}
+  .cta-row{display:flex; flex-wrap:wrap; gap:14px; align-items:center}
+  .cta{display:inline-block; font-weight:600; font-size:16px; padding:13px 26px; border-radius:8px; background:var(--acc); color:#fff}
+  .cta:hover{background:var(--acc-d); text-decoration:none}
+  .cta.ghost{background:transparent; color:var(--ink); border:1px solid var(--line)} .cta.ghost:hover{background:var(--panel); border-color:#cdc7b8}
+  section{padding:70px 0; border-top:1px solid var(--line2)}
+  .kicker{font-size:13px; letter-spacing:.16em; text-transform:uppercase; color:var(--acc); font-weight:700; margin:0 0 16px}
+  h2{font-size:clamp(28px,3.6vw,40px); line-height:1.14; letter-spacing:-.018em; font-weight:560; margin:0 0 18px; color:var(--ink)}
+  .sub{font-size:18px; color:var(--muted); margin:0 0 40px; max-width:680px}
+  p{margin:0 0 14px} strong{font-weight:650; color:var(--ink2)}
+  .svc{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
+  .svc .col{display:flex; flex-direction:column; border:1px solid var(--line); border-radius:16px; padding:28px 26px 24px; background:var(--card); transition:.15s}
+  .svc .col:hover{border-color:#cdbcae; box-shadow:0 12px 34px -20px rgba(60,40,20,.35); transform:translateY(-3px)}
+  .svc .num{font-size:13px; letter-spacing:.1em; color:var(--faint); margin:0 0 14px}
+  .svc h3{font-size:22px; line-height:1.18; letter-spacing:-.01em; margin:0 0 10px; color:var(--ink)}
+  .svc .col > p{font-size:15.5px; color:var(--muted); margin:0 0 16px}
+  .svc ul{list-style:none; margin:0 0 20px; padding:0}
+  .svc li{font-size:14.5px; color:var(--ink2); padding:7px 0 7px 22px; position:relative; border-top:1px solid var(--line2)}
+  .svc li:first-child{border-top:none}
+  .svc li::before{content:""; position:absolute; left:2px; top:14px; width:7px; height:7px; border-radius:50%; background:var(--acc)}
+  .svc .go{margin-top:auto; font-weight:600; font-size:15px; color:var(--acc)}
+  @media(max-width:860px){.svc{grid-template-columns:1fr}}
+  .cred{background:var(--navy); color:#eaf0f5; border-radius:18px; padding:46px 40px; text-align:center}
+  .cred .lab{font-size:13px; letter-spacing:.18em; text-transform:uppercase; color:#8fb0cb; margin:0 0 8px}
+  .cred h2{color:#fff; font-size:clamp(24px,3vw,32px); margin:0 0 26px; max-width:640px; margin-left:auto; margin-right:auto}
+  .logos{display:flex; flex-wrap:wrap; justify-content:center; gap:16px 34px; margin:0 0 26px}
+  .logos span{font-size:20px; font-weight:700; letter-spacing:-.01em; color:#dbe6ef; opacity:.9}
+  .cred .certs{font-size:14px; color:#8fb0cb} .cred .certs strong{color:#eaf0f5}
+  .proof{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+  .proof .p{border:1px solid var(--line); border-radius:14px; padding:20px 22px; background:var(--card)}
+  .proof .p h3{font-size:16.5px; margin:0 0 7px; color:var(--ink)} .proof .p p{font-size:14px; color:var(--muted); margin:0}
+  .tag{display:inline-block; font-size:10.5px; letter-spacing:.04em; text-transform:uppercase; color:var(--acc); border:1px solid #e3c3b5; background:var(--acc-soft); border-radius:20px; padding:1px 8px; margin-left:7px; vertical-align:middle}
+  @media(max-width:760px){.proof{grid-template-columns:1fr}}
+  .talk{border:1px solid var(--line); border-radius:18px; padding:46px 40px; background:linear-gradient(180deg,var(--acc-soft),var(--card))}
+  .talk h2{margin-bottom:12px} .talk p{color:var(--ink2); max-width:580px}
+  footer{padding:42px 0 90px; color:var(--faint); font-size:14px; border-top:1px solid var(--line2)}
+  .draftbar{background:#f6eccf; border-bottom:1px solid #e3d39f; color:#6b5a1f; font-size:12.5px; text-align:center; padding:7px 12px}
+  .note{font-size:13px; color:var(--faint); font-style:italic}
 </style>
 </head>
 <body>
-<div class="draftbar">Private working draft — PORTFOLIO with everything in, for Faz to cut down (via negativa). Not published.</div>
+<div class="draftbar">Private working draft. Not published.</div>
+
+<nav class="top">
+  <div class="wrap">
+    <span class="brand">net<b>fm</b></span>
+    <div class="links">
+      <a class="active" href="index.html">Home</a>
+      <a href="ai-advisory.html">AI advisory</a>
+      <a href="network-advisory.html">Network engineering</a>
+      <a href="ai-network.html">AI × Network</a>
+      <a href="about.html">About</a>
+    </div>
+  </div>
+</nav>
+
 <div class="wrap">
 
-  <header>
-    <p class="eyebrow">Faz Memon · netfm.co.uk</p>
-    <h1>I build real products with AI — and get businesses using it.</h1>
-    <p class="lede">I connected small businesses to the internet in the 1990s, spent 25 years building the networks it runs on, and at Meta was rated AI-native. Now I do the same for AI: get a business producing real, reliable work with it — and leave their people able to run it.</p>
+  <header class="hero">
+    <p class="eyebrow">netfm · AI &amp; network advisory</p>
+    <h1 class="serif">Senior advisory for AI — and the networks it runs on.</h1>
+    <p class="lede">I set businesses up on the internet in the 1990s, spent 25 years building the Tier-1 networks the world runs on, and got AI-native at Meta. Today I help businesses use AI for real, reliable work — and I help operators build their networks properly. Two kinds of hard-won depth, one standard: the real thing, handed over, no slop.</p>
+    <div class="cta-row">
+      <a class="cta" href="#services">Explore the practice</a>
+      <a class="cta ghost" href="#talk">Book a 25-minute call</a>
+    </div>
   </header>
 
-  <section>
-    <h2>What I've built</h2>
-    <div class="grid">
-      <div class="card"><h3>Chip Adviser <span class="tag">live</span></h3><p>A live, public AI product — an AI-curated local guide, built and run end-to-end with a partner. Real users, real reviews.</p><p class="who">For: anyone who wants a real, finished AI product shipped — not a prototype.</p></div>
-      <div class="card"><h3>Multi-agent trading system <span class="tag">demo</span></h3><p>A live trading platform I built and run, shown here as a <strong>runnable, fully-synthetic demo</strong> (fake data, no real strategy): signals → risk → allocation, several agents under one coordinator. Proves end-to-end orchestration safely.</p><p class="who">For: any business with a complex, multi-step process that needs many AI steps coordinated reliably.</p></div>
-      <div class="card"><h3>AI digital marketer <span class="tag">in dev</span></h3><p>Software that takes a business → offer → landing page → ad angles → leads → feedback → better angles.</p><p class="who">For: small businesses that need marketing but can't afford or trust an agency.</p></div>
-      <div class="card"><h3>Property sourcing tool <span class="tag">early</span></h3><p>AI that values flats from the floor-plan and photos (condition, floor-area), flags hidden defects (on the tracks, busy road), and finds genuinely under-priced stock.</p><p class="who">For: property investors and sourcers — and anyone grading or valuing from images and documents.</p></div>
-      <div class="card"><h3>Grounded knowledge assistant (RAG) <span class="tag">demo</span></h3><p>Answers from a specific set of documents, cites its sources, and says "not in the material" instead of making things up. Built and working.</p><p class="who">For: healthcare, law firms, finance — any regulated or document-heavy business whose staff need trustworthy answers from their own files.</p></div>
-      <div class="card"><h3>The operating system <span class="tag">the method</span></h3><p>How I get reliable output from AI at all: a work board, a memory that doesn't drift, agents that check each other, and hard anti-fabrication gates. The engine under everything here.</p><p class="who">For: any business that wants AI to produce work it can actually trust.</p></div>
-      <div class="card"><h3>Network performance analytics <span class="tag">Meta-grade</span></h3><p>Measurement pipelines and causal analysis (did a change actually work?), geographic anomaly detection, one-click analysis tools — rigorous, data-backed work applied to a business's own questions. <span class="note">(capability, no client specifics)</span></p><p class="who">For: any business that needs to know whether a decision or change actually moved the needle.</p></div>
-      <div class="card"><h3>Carrier networks, 25 years <span class="tag">career</span></h3><p>Built the Tier-1 networks the internet runs on: Sky UK re-architecture, Liberty Global's Tier-1 backbone, a world-first 3G rollout at Three, plus Nokia/Deutsche Telekom and KPN.</p></div>
+  <section id="services">
+    <p class="kicker">What I do</p>
+    <h2 class="serif">Three ways I work with you.</h2>
+    <p class="sub">Each is its own practice with its own page. Start wherever your problem is.</p>
+    <div class="svc">
+      <div class="col">
+        <p class="num">01</p>
+        <h3 class="serif">AI advisory</h3>
+        <p>Get your business producing reliable work with AI — set up around one real output, proven, and handed to your team.</p>
+        <ul>
+          <li>One trusted output or workflow, not a chatbot</li>
+          <li>Your nominated person runs it after I leave</li>
+          <li>Fixed price from £2,500 · no retainer</li>
+        </ul>
+        <a class="go" href="ai-advisory.html">Explore AI advisory →</a>
+      </div>
+      <div class="col">
+        <p class="num">02</p>
+        <h3 class="serif">Network-engineering advisory</h3>
+        <p>25 years on Tier-1 carrier and service-provider networks — the kind the biggest operators in the world run on.</p>
+        <ul>
+          <li>Backbone, core &amp; MPLS/BGP architecture</li>
+          <li>Migration planning &amp; independent senior review</li>
+          <li>Sky · Liberty Global · Three · Nokia/DT · KPN</li>
+        </ul>
+        <a class="go" href="network-advisory.html">Explore network advisory →</a>
+      </div>
+      <div class="col">
+        <p class="num">03</p>
+        <h3 class="serif">AI × network engineering</h3>
+        <p>Where the two meet: AI applied to network and infrastructure problems, with the judgment to know what’s worth automating.</p>
+        <ul>
+          <li>Measurement &amp; anomaly detection</li>
+          <li>“Did this change actually work?” analysis</li>
+          <li>A combination very few people can offer</li>
+        </ul>
+        <a class="go" href="ai-network.html">Explore AI × network →</a>
+      </div>
     </div>
-    <p class="note" style="margin-top:14px">Everything's in so you can see the full set and cut — tell me which to drop, merge, or play down.</p>
   </section>
 
   <section>
-    <h2>Background</h2>
-    <div class="creds">
-      <div><strong>CCIE</strong> #5897 · <strong>JNCIE-SP</strong> #847</div>
-      <div>25 years building carrier / Tier-1 networks</div>
-      <div>Meta — rated <strong>AI-native</strong></div>
-      <div>Set up small businesses on the internet in the 1990s</div>
+    <div class="cred">
+      <p class="lab">The scale behind the advice</p>
+      <h2 class="serif">For 25 years I built the networks the internet runs on.</h2>
+      <div class="logos">
+        <span>Sky</span><span>Liberty&nbsp;Global</span><span>Three</span><span>Nokia</span><span>Deutsche&nbsp;Telekom</span><span>KPN</span><span>Comcast</span><span>Meta</span>
+      </div>
+      <p class="certs"><strong>CCIE</strong> #5897 &nbsp;·&nbsp; <strong>JNCIE-SP</strong> #847 &nbsp;·&nbsp; Meta — rated <strong>AI-native</strong></p>
     </div>
   </section>
 
   <section>
-    <h2>How I work</h2>
-    <p>I take one real piece of work your team needs, set up my system to produce it reliably, and hand it over so your nominated person can run it without me. No maintenance, no retainer — you own it.</p>
-    <div class="rungs">
-      <div class="rung"><span>One output, produced and handed over</span><span class="price">£2,500</span></div>
-      <div class="rung"><span>One recurring workflow, full setup + owner handover</span><span class="price">£6,000</span></div>
-      <div class="rung"><span>One end-to-end project + a reusable pack your team keeps</span><span class="price">£12,000</span></div>
+    <p class="kicker">Proof</p>
+    <h2 class="serif">Real things I’ve shipped.</h2>
+    <p class="sub">The work is the argument — built, not mocked up.</p>
+    <div class="proof">
+      <div class="p"><h3>RAG assistant <span class="tag">demo</span></h3><p>An assistant on your own documents that cites sources and refuses to guess. The output most businesses want first.</p></div>
+      <div class="p"><h3>Chip Adviser <span class="tag">live</span></h3><p>A live, public AI product — built and run end-to-end with a partner. Real users, real reviews.</p></div>
+      <div class="p"><h3>Multi-agent trading system <span class="tag">demo</span></h3><p>A live platform I built and run, shown as a safe synthetic demo: many AI steps coordinated reliably.</p></div>
     </div>
-    <p class="note" style="margin-top:12px">Ex-VAT, fixed, on a free 25-minute call.</p>
+    <p class="note" style="margin-top:16px">Draft — proof set will be trimmed and the Meta / trading wording signed off before anything’s public.</p>
   </section>
 
-  <section>
-    <h2>Ask me</h2>
-    <div class="agent">
-      <p style="margin:0 0 8px"><strong>A live assistant, trained on my work.</strong> Ask it what I've built, how I work, whether your problem fits — it answers from the facts and draws the line when something becomes paid work. It's also a small live demo of the thing I do.</p>
-      <p class="note" style="margin:0">[ Coming back in — needs a small backend, not on this static draft. The earlier version (serve.py) is the starting point. ]</p>
+  <section id="talk">
+    <div class="talk">
+      <p class="kicker">Talk to me</p>
+      <h2 class="serif">Tell me the one problem worth solving.</h2>
+      <p>A 25-minute call is free — whether it’s an AI output you can’t trust yet or a network decision you need a senior pair of eyes on. I’ll tell you straight whether it’s a fit, and what it would take.</p>
+      <p style="margin-top:20px"><a class="cta" href="mailto:faz@netfm.co.uk">Book a call</a></p>
     </div>
   </section>
 
   <footer>
-    <p>Faz Memon · netfm.co.uk · a 25-minute call is free.</p>
+    <p>netfm · Faz Memon · AI &amp; network advisory · a 25-minute call is free.</p>
   </footer>
 
 </div>

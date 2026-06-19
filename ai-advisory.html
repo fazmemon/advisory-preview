@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>netfm — AI advisory</title>
+<style>
+  :root{
+    --paper:#f4f2ec; --panel:#efece2; --ink:#1b1a16; --ink2:#33312b;
+    --muted:#6f695d; --faint:#928c7e; --line:#ddd8cb; --line2:#e8e4d9;
+    --acc:#c15f3c; --acc-d:#a44c2d; --acc-soft:#f3e3da; --navy:#16304a; --card:#fbfaf5;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0; background:var(--paper); color:var(--ink);
+    font:17px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif; -webkit-font-smoothing:antialiased;}
+  .serif{font-family:"Tiempos Headline",Georgia,"Times New Roman",serif}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 30px}
+  a{color:var(--acc); text-decoration:none} a:hover{text-decoration:underline}
+
+  nav.top{position:sticky; top:0; z-index:10; border-bottom:1px solid var(--line2); background:rgba(244,242,236,.82); backdrop-filter:saturate(140%) blur(10px)}
+  nav.top .wrap{display:flex; align-items:center; justify-content:space-between; padding:16px 30px}
+  .brand{font-weight:800; letter-spacing:-.02em; font-size:19px; color:var(--ink)} .brand b{color:var(--acc)}
+  nav .links{display:flex; gap:26px; font-size:15px}
+  nav .links a{color:var(--muted)} nav .links a:hover{color:var(--ink); text-decoration:none}
+  nav .links a.active{color:var(--ink); font-weight:600}
+  @media(max-width:780px){nav .links{display:none}}
+
+  .hero{padding:84px 0 60px; max-width:900px}
+  .crumb{font-size:13px; letter-spacing:.16em; text-transform:uppercase; color:var(--acc); font-weight:700; margin:0 0 24px}
+  h1{font-size:clamp(38px,5.4vw,60px); line-height:1.07; letter-spacing:-.02em; font-weight:560; margin:0 0 24px}
+  .lede{font-size:20px; line-height:1.6; color:var(--ink2); margin:0 0 32px; max-width:700px}
+  .cta-row{display:flex; flex-wrap:wrap; gap:14px; align-items:center}
+  .cta{display:inline-block; font-weight:600; font-size:16px; padding:13px 26px; border-radius:8px; background:var(--acc); color:#fff}
+  .cta:hover{background:var(--acc-d); text-decoration:none}
+  .cta.ghost{background:transparent; color:var(--ink); border:1px solid var(--line)} .cta.ghost:hover{background:var(--panel)}
+
+  section{padding:66px 0; border-top:1px solid var(--line2)}
+  .kicker{font-size:13px; letter-spacing:.16em; text-transform:uppercase; color:var(--acc); font-weight:700; margin:0 0 16px}
+  h2{font-size:clamp(27px,3.4vw,38px); line-height:1.14; letter-spacing:-.018em; font-weight:560; margin:0 0 18px}
+  .sub{font-size:18px; color:var(--muted); margin:0 0 38px; max-width:680px}
+  p{margin:0 0 14px} strong{font-weight:650; color:var(--ink2)}
+
+  /* RAG feature */
+  .feature{display:grid; grid-template-columns:1fr 1.04fr; gap:40px; align-items:center}
+  .feature .copy p{color:var(--ink2); font-size:16.5px; max-width:470px}
+  .feature .actions{margin-top:24px; display:flex; gap:12px; flex-wrap:wrap}
+  @media(max-width:840px){.feature{grid-template-columns:1fr; gap:28px}}
+  .chat{border:1px solid var(--line); border-radius:16px; background:var(--card); box-shadow:0 30px 70px -38px rgba(60,40,20,.5); overflow:hidden}
+  .chat .bar{display:flex; align-items:center; gap:7px; padding:13px 16px; border-bottom:1px solid var(--line2); background:var(--panel)}
+  .chat .bar i{width:11px; height:11px; border-radius:50%; background:#cfc8b8; display:inline-block}
+  .chat .bar .t{margin-left:8px; font-size:12.5px; color:var(--faint)}
+  .chat .body{padding:18px; display:flex; flex-direction:column; gap:13px}
+  .q{align-self:flex-end; max-width:80%; background:var(--panel); border:1px solid var(--line); border-radius:13px 13px 4px 13px; padding:10px 14px; font-size:14.5px; color:var(--ink2)}
+  .a{align-self:flex-start; max-width:90%; background:var(--acc-soft); border:1px solid #e3c3b5; border-radius:13px 13px 13px 4px; padding:11px 14px; font-size:14.5px; color:#5a3122}
+  .a.neg{background:var(--card); border-color:var(--line); color:var(--muted)}
+  .cite{display:inline-block; margin-top:8px; font-size:11.5px; color:var(--acc-d); border:1px solid #e3c3b5; border-radius:20px; padding:2px 9px}
+  .cite::before{content:"⛁ "; opacity:.7}
+
+  /* outcome cards */
+  .grid{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+  .card{border:1px solid var(--line); border-radius:14px; padding:22px 24px; background:var(--card)}
+  .card h3{font-size:18px; margin:0 0 8px; letter-spacing:-.01em} .card p{font-size:15px; color:var(--muted); margin:0; line-height:1.55}
+
+  /* mechanism / OS */
+  .os{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+  .os .o{border:1px solid var(--line); border-left:3px solid var(--acc); border-radius:10px; padding:16px 18px; background:var(--card)}
+  .os .o h4{margin:0 0 4px; font-size:15.5px} .os .o p{margin:0; font-size:14px; color:var(--muted)}
+
+  /* handover steps */
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; counter-reset:s}
+  .step{border:1px solid var(--line); border-radius:14px; padding:22px 22px; background:var(--card); position:relative}
+  .step .n{font-family:Georgia,serif; font-size:30px; color:var(--acc); line-height:1; margin:0 0 12px}
+  .step h4{margin:0 0 6px; font-size:16.5px} .step p{margin:0; font-size:14px; color:var(--muted)}
+  @media(max-width:760px){.steps{grid-template-columns:1fr} .grid{grid-template-columns:1fr} .os{grid-template-columns:1fr}}
+
+  /* ladder */
+  .ladder{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+  .rung{border:1px solid var(--line); border-radius:16px; padding:26px 24px; background:var(--card); display:flex; flex-direction:column}
+  .rung.mid{border-color:#d9b09e; box-shadow:0 14px 34px -22px rgba(160,76,45,.4)}
+  .rung .price{font-family:Georgia,serif; font-size:32px; color:var(--ink); margin:0 0 4px}
+  .rung .name{font-size:14px; color:var(--acc); font-weight:650; letter-spacing:.02em; margin:0 0 16px}
+  .rung ul{list-style:none; margin:0; padding:0}
+  .rung li{font-size:14px; color:var(--ink2); padding:8px 0 8px 20px; position:relative; border-top:1px solid var(--line2)}
+  .rung li:first-child{border-top:none}
+  .rung li::before{content:"✓"; position:absolute; left:0; top:8px; color:var(--acc); font-size:12px}
+  @media(max-width:760px){.ladder{grid-template-columns:1fr}}
+
+  /* fit / not fit */
+  .fit{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+  .fitbox{border:1px solid var(--line); border-radius:14px; padding:22px 24px; background:var(--card)}
+  .fitbox h3{font-size:16px; margin:0 0 12px} .fitbox ul{margin:0; padding:0; list-style:none}
+  .fitbox li{font-size:14.5px; color:var(--ink2); padding:6px 0 6px 24px; position:relative}
+  .fitbox.yes li::before{content:"✓"; position:absolute; left:0; color:#2f7d4f; font-weight:700}
+  .fitbox.no li::before{content:"✕"; position:absolute; left:0; color:#b14a36; font-weight:700}
+  @media(max-width:680px){.fit{grid-template-columns:1fr}}
+
+  /* dial */
+  .dial{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:8px}
+  .dial .d{border:1px solid var(--line); border-radius:12px; padding:16px 16px; background:var(--card)}
+  .dial .d .lv{font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--faint); margin:0 0 6px}
+  .dial .d h4{margin:0 0 5px; font-size:15px} .dial .d p{margin:0; font-size:13px; color:var(--muted)}
+  @media(max-width:760px){.dial{grid-template-columns:1fr 1fr}}
+
+  .talk{border:1px solid var(--line); border-radius:18px; padding:46px 40px; background:linear-gradient(180deg,var(--acc-soft),var(--card))}
+  .talk h2{margin-bottom:12px} .talk p{color:var(--ink2); max-width:580px}
+
+  footer{padding:42px 0 90px; color:var(--faint); font-size:14px; border-top:1px solid var(--line2)}
+  .draftbar{background:#f6eccf; border-bottom:1px solid #e3d39f; color:#6b5a1f; font-size:12.5px; text-align:center; padding:7px 12px}
+  .note{font-size:13px; color:var(--faint); font-style:italic}
+</style>
+</head>
+<body>
+<div class="draftbar">Private working draft — AI advisory (v1). Not published.</div>
+
+<nav class="top">
+  <div class="wrap">
+    <span class="brand">net<b>fm</b></span>
+    <div class="links">
+      <a href="index.html">Home</a>
+      <a class="active" href="ai-advisory.html">AI advisory</a>
+      <a href="network-advisory.html">Network engineering</a>
+      <a href="ai-network.html">AI × Network</a>
+      <a href="about.html">About</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <header class="hero">
+    <p class="crumb">AI advisory</p>
+    <h1 class="serif">Get one real piece of work produced reliably with AI — and own it.</h1>
+    <p class="lede">Most teams now use AI, but can’t trust what it produces — so it never becomes real work. I take one output your team actually needs, set up a system that produces it dependably, prove it with you, and hand it to your own people. No maintenance, no retainer.</p>
+    <div class="cta-row">
+      <a class="cta" href="#talk">Book a 25-minute call</a>
+      <a class="cta ghost" href="#rag">See the flagship example →</a>
+    </div>
+  </header>
+
+  <section id="rag">
+    <div class="feature">
+      <div class="copy">
+        <p class="kicker">The example most businesses want first</p>
+        <h2 class="serif">An assistant on your own documents — that never makes things up.</h2>
+        <p>Your policies, guidelines, handbooks, case notes. A team member asks a question; it answers <strong>from your material</strong>, shows the source, and says <strong>“that’s not in our documents”</strong> rather than guessing. No more hunting through PDFs — and nothing invented, the part a regulated business needs before it can say yes to AI. Built and working today.</p>
+        <div class="actions">
+          <a class="cta" href="#talk">Try it on your docs</a>
+          <a class="cta ghost" href="#ladder">What it costs →</a>
+        </div>
+      </div>
+      <div class="chat" aria-hidden="true">
+        <div class="bar"><i></i><i></i><i></i><span class="t mono">your-docs · assistant</span></div>
+        <div class="body">
+          <div class="q">What’s our policy on lone-working visits?</div>
+          <div class="a">Staff log the visit, share live location with a buddy, and check in within 30 minutes of leaving. Out-of-hours visits need manager sign-off.
+            <span class="cite mono">staff-handbook.pdf · p.12</span>
+          </div>
+          <div class="q">What’s our stance on crypto?</div>
+          <div class="a neg">That’s not covered in your documents — I won’t guess. Add a source and I’ll answer from it.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="kicker">What you get</p>
+    <h2 class="serif">An outcome you own — not a chatbot you’re left to figure out.</h2>
+    <div class="grid">
+      <div class="card"><h3>One trusted output, on demand</h3><p>A report, proposal, analysis or set of customer replies your team needs again and again — produced to a standard you’d sign off, every time. Not generic slop.</p></div>
+      <div class="card"><h3>A workflow your team runs</h3><p>The process set up to run with AI and handed to your nominated person, so it keeps working after I leave. You own it outright.</p></div>
+      <div class="card"><h3>The runbook that makes it safe</h3><p>Plain guidelines for how to run it, what to check, and where it can go wrong — so your team can trust the output and catch the rare miss.</p></div>
+      <div class="card"><h3>Honesty, not magic</h3><p>It isn’t foolproof and I won’t pretend it is. I build in the checks that make it reliable, and tell you exactly where the limits are.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <p class="kicker">How it’s actually reliable</p>
+    <h2 class="serif">The operating system underneath.</h2>
+    <p class="sub">Anyone can prompt a chatbot. The reason the output holds up is the system I install around it — the same one I run my own products on.</p>
+    <div class="os">
+      <div class="o"><h4>A work board</h4><p>Every task, its state, and what’s next — shared, not lost in a chat history.</p></div>
+      <div class="o"><h4>Memory that doesn’t drift</h4><p>Context that persists across sessions, so it doesn’t forget your facts or contradict itself.</p></div>
+      <div class="o"><h4>Agents that check each other</h4><p>One produces, another reviews — work is challenged before it’s accepted.</p></div>
+      <div class="o"><h4>Anti-fabrication gates</h4><p>Hard rules that stop it presenting guesses as facts — the “never makes things up” you saw above.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <p class="kicker">Your data, your dial</p>
+    <h2 class="serif">As private as you need — no more, no less.</h2>
+    <p class="sub">Where your data goes is a choice, not a default. I set the dial to your compliance need and your budget — the senior judgment that lets a regulated business actually say yes.</p>
+    <div class="dial">
+      <div class="d"><p class="lv">Most open</p><h4>Big-tech API</h4><p>Cheapest, fastest. Data goes to the AI provider — fine for non-sensitive work.</p></div>
+      <div class="d"><p class="lv">Sweet spot</p><h4>Open models, Western-hosted</h4><p>Strong models, low cost, data stays off big-tech and off China. Right for most regulated SMEs.</p></div>
+      <div class="d"><p class="lv">More control</p><h4>Dedicated cloud</h4><p>Runs in your own tenancy — more control, more cost.</p></div>
+      <div class="d"><p class="lv">Most private</p><h4>On-prem / air-gapped</h4><p>Data never leaves the building. Maximum privacy; real hardware and upkeep.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <p class="kicker">The handover</p>
+    <h2 class="serif">It only counts when your team can run it without me.</h2>
+    <p class="sub">No black box, no dependency on me. Your nominated owner has to pass a real, three-cycle handover before the job is done.</p>
+    <div class="steps">
+      <div class="step"><p class="n serif">1</p><h4>I run it, narrating</h4><p>First cycle is mine — your owner watches every step and why.</p></div>
+      <div class="step"><p class="n serif">2</p><h4>They run it, I’m on the gates</h4><p>Your owner drives; I only step in at the checkpoints.</p></div>
+      <div class="step"><p class="n serif">3</p><h4>They run it solo</h4><p>Owner runs it alone. It’s only complete if this cycle passes the acceptance checklist.</p></div>
+    </div>
+    <p class="note" style="margin-top:16px">That handover needs one capable person on your side to take it on — the “AI owner”. It’s the same designated-learner every business had when I connected them to the internet in the 90s.</p>
+  </section>
+
+  <section id="ladder">
+    <p class="kicker">What it costs</p>
+    <h2 class="serif">Fixed price. One workflow. You own the result.</h2>
+    <p class="sub">Agreed on a free 25-minute call. Ex-VAT, fixed — no hourly billing, no retainer.</p>
+    <div class="ladder">
+      <div class="rung">
+        <p class="price serif">£2,500</p>
+        <p class="name">See it work</p>
+        <ul>
+          <li>One real output produced with you</li>
+          <li>The core board + memory set up</li>
+          <li>A runbook so you can repeat it</li>
+          <li>Proof your owner can run it</li>
+        </ul>
+      </div>
+      <div class="rung mid">
+        <p class="price serif">£6,000</p>
+        <p class="name">Install for your team</p>
+        <ul>
+          <li>One recurring workflow, end to end</li>
+          <li>Full board, memory &amp; checking gates</li>
+          <li>Three-cycle owner handover</li>
+          <li>Runbook + acceptance checklist</li>
+        </ul>
+      </div>
+      <div class="rung">
+        <p class="price serif">£12,000</p>
+        <p class="name">Run a real project</p>
+        <ul>
+          <li>An end-to-end project through the system</li>
+          <li>A reusable operating pack your team keeps</li>
+          <li>Full handover + acceptance test</li>
+          <li>The most you can own outright</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="kicker">Is it for you?</p>
+    <h2 class="serif">Honest about fit.</h2>
+    <div class="fit">
+      <div class="fitbox yes">
+        <h3>A good fit if you…</h3>
+        <ul>
+          <li>Have one output your team produces again and again</li>
+          <li>Already use AI but can’t trust what it gives you</li>
+          <li>Have one capable person to own it after I leave</li>
+          <li>Want to own the capability, not rent it forever</li>
+        </ul>
+      </div>
+      <div class="fitbox no">
+        <h3>Not a fit if you…</h3>
+        <ul>
+          <li>Have no one internal to take it on</li>
+          <li>Want a magic chatbot that needs no checking</li>
+          <li>Want me to run and maintain it indefinitely</li>
+          <li>Have no repeated, definable piece of work yet</li>
+        </ul>
+      </div>
+    </div>
+    <p class="note" style="margin-top:16px">No owner or no repeated output? I’ll tell you that on the call — and what a sensible first step is instead.</p>
+  </section>
+
+  <section>
+    <p class="kicker">Proof</p>
+    <h2 class="serif">The work is the argument.</h2>
+    <div class="proof" style="display:grid; grid-template-columns:repeat(3,1fr); gap:16px">
+      <div class="card"><h3>RAG assistant</h3><p>The grounded, no-fabrication assistant above — built and working.</p></div>
+      <div class="card"><h3>Chip Adviser</h3><p>A live, public AI product built and run end-to-end with a partner.</p></div>
+      <div class="card"><h3>Multi-agent trading system</h3><p>A live platform I run, shown as a safe synthetic demo — many AI steps coordinated reliably.</p></div>
+    </div>
+    <p class="note" style="margin-top:16px">Draft — proof set to be trimmed and the Meta / trading wording signed off before public.</p>
+  </section>
+
+  <section id="talk">
+    <div class="talk">
+      <p class="kicker">Talk to me</p>
+      <h2 class="serif">What’s the one output you wish you could trust AI to produce?</h2>
+      <p>Tell me that on a free 25-minute call. I’ll tell you straight whether it’s a fit, which rung it is, and what it would take.</p>
+      <p style="margin-top:20px"><a class="cta" href="mailto:faz@netfm.co.uk">Book a call</a></p>
+    </div>
+  </section>
+
+  <footer>
+    <p>netfm · Faz Memon · AI advisory · <a href="index.html">back to home</a></p>
+  </footer>
+
+</div>
+</body>
+</html>

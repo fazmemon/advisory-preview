@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>netfm — network-engineering advisory</title>
+<style>
+  :root{
+    --paper:#f4f2ec; --panel:#efece2; --ink:#1b1a16; --ink2:#33312b;
+    --muted:#6f695d; --faint:#928c7e; --line:#ddd8cb; --line2:#e8e4d9;
+    --acc:#c15f3c; --acc-d:#a44c2d; --acc-soft:#f3e3da; --navy:#16304a; --card:#fbfaf5;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0; background:var(--paper); color:var(--ink);
+    font:17px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif; -webkit-font-smoothing:antialiased;}
+  .serif{font-family:"Tiempos Headline",Georgia,"Times New Roman",serif}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 30px}
+  a{color:var(--acc); text-decoration:none} a:hover{text-decoration:underline}
+  nav.top{position:sticky; top:0; z-index:10; border-bottom:1px solid var(--line2); background:rgba(244,242,236,.82); backdrop-filter:saturate(140%) blur(10px)}
+  nav.top .wrap{display:flex; align-items:center; justify-content:space-between; padding:16px 30px}
+  .brand{font-weight:800; letter-spacing:-.02em; font-size:19px; color:var(--ink)} .brand b{color:var(--acc)}
+  nav .links{display:flex; gap:26px; font-size:15px}
+  nav .links a{color:var(--muted)} nav .links a:hover{color:var(--ink); text-decoration:none}
+  nav .links a.active{color:var(--ink); font-weight:600}
+  @media(max-width:780px){nav .links{display:none}}
+  .hero{padding:84px 0 60px; max-width:900px}
+  .crumb{font-size:13px; letter-spacing:.16em; text-transform:uppercase; color:var(--acc); font-weight:700; margin:0 0 24px}
+  h1{font-size:clamp(38px,5.4vw,60px); line-height:1.07; letter-spacing:-.02em; font-weight:560; margin:0 0 24px}
+  .lede{font-size:20px; line-height:1.6; color:var(--ink2); margin:0 0 32px; max-width:700px}
+  .cta-row{display:flex; flex-wrap:wrap; gap:14px; align-items:center}
+  .cta{display:inline-block; font-weight:600; font-size:16px; padding:13px 26px; border-radius:8px; background:var(--acc); color:#fff}
+  .cta:hover{background:var(--acc-d); text-decoration:none}
+  .cta.ghost{background:transparent; color:var(--ink); border:1px solid var(--line)} .cta.ghost:hover{background:var(--panel)}
+  section{padding:66px 0; border-top:1px solid var(--line2)}
+  .kicker{font-size:13px; letter-spacing:.16em; text-transform:uppercase; color:var(--acc); font-weight:700; margin:0 0 16px}
+  h2{font-size:clamp(27px,3.4vw,38px); line-height:1.14; letter-spacing:-.018em; font-weight:560; margin:0 0 18px}
+  .sub{font-size:18px; color:var(--muted); margin:0 0 36px; max-width:680px}
+  p{margin:0 0 14px} strong{font-weight:650; color:var(--ink2)}
+  /* two tracks */
+  .tracks{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+  .track{border:1px solid var(--line); border-radius:16px; padding:30px 28px; background:var(--card); display:flex; flex-direction:column}
+  .track.lead{border-color:#d9b09e; box-shadow:0 14px 34px -22px rgba(160,76,45,.4)}
+  .track .badge{display:inline-block; align-self:flex-start; font-size:11.5px; letter-spacing:.06em; text-transform:uppercase; font-weight:700; color:var(--acc); border:1px solid #e3c3b5; background:var(--acc-soft); border-radius:20px; padding:3px 11px; margin:0 0 16px}
+  .track h3{font-size:23px; line-height:1.18; margin:0 0 10px; letter-spacing:-.01em}
+  .track > p{font-size:15.5px; color:var(--muted); margin:0 0 18px}
+  .track ul{list-style:none; margin:0 0 20px; padding:0}
+  .track li{font-size:14.5px; color:var(--ink2); padding:8px 0 8px 22px; position:relative; border-top:1px solid var(--line2)}
+  .track li:first-child{border-top:none}
+  .track li::before{content:""; position:absolute; left:2px; top:15px; width:7px; height:7px; border-radius:50%; background:var(--acc)}
+  .track .who{margin-top:auto; font-size:13.5px; color:var(--faint); font-style:italic}
+  @media(max-width:820px){.tracks{grid-template-columns:1fr}}
+  /* bot mock */
+  .bot{margin-top:22px; border:1px solid var(--line); border-radius:14px; background:var(--card); overflow:hidden; max-width:560px}
+  .bot .bar{display:flex; gap:7px; align-items:center; padding:12px 15px; border-bottom:1px solid var(--line2); background:var(--panel)}
+  .bot .bar i{width:10px; height:10px; border-radius:50%; background:#cfc8b8} .bot .bar .t{margin-left:7px; font-size:12px; color:var(--faint)}
+  .bot .body{padding:16px; display:flex; flex-direction:column; gap:11px}
+  .q{align-self:flex-end; max-width:82%; background:var(--panel); border:1px solid var(--line); border-radius:12px 12px 4px 12px; padding:9px 13px; font-size:14px; color:var(--ink2)}
+  .a{align-self:flex-start; max-width:90%; background:var(--acc-soft); border:1px solid #e3c3b5; border-radius:12px 12px 12px 4px; padding:10px 13px; font-size:14px; color:#5a3122}
+  /* cred */
+  .cred{background:var(--navy); color:#eaf0f5; border-radius:18px; padding:46px 40px; text-align:center}
+  .cred .lab{font-size:13px; letter-spacing:.18em; text-transform:uppercase; color:#8fb0cb; margin:0 0 8px}
+  .cred h2{color:#fff; font-size:clamp(24px,3vw,32px); margin:0 0 26px; max-width:680px; margin-left:auto; margin-right:auto}
+  .logos{display:flex; flex-wrap:wrap; justify-content:center; gap:16px 34px; margin:0 0 26px}
+  .logos span{font-size:20px; font-weight:700; letter-spacing:-.01em; color:#dbe6ef; opacity:.9}
+  .cred .certs{font-size:14px; color:#8fb0cb} .cred .certs strong{color:#eaf0f5}
+  .talk{border:1px solid var(--line); border-radius:18px; padding:46px 40px; background:linear-gradient(180deg,var(--acc-soft),var(--card))}
+  .talk h2{margin-bottom:12px} .talk p{color:var(--ink2); max-width:580px}
+  footer{padding:42px 0 90px; color:var(--faint); font-size:14px; border-top:1px solid var(--line2)}
+  .draftbar{background:#f6eccf; border-bottom:1px solid #e3d39f; color:#6b5a1f; font-size:12.5px; text-align:center; padding:7px 12px}
+  .note{font-size:13px; color:var(--faint); font-style:italic}
+</style>
+</head>
+<body>
+<div class="draftbar">Private working draft — Network-engineering advisory (v1). Not published.</div>
+
+<nav class="top">
+  <div class="wrap">
+    <span class="brand">net<b>fm</b></span>
+    <div class="links">
+      <a href="index.html">Home</a>
+      <a href="ai-advisory.html">AI advisory</a>
+      <a class="active" href="network-advisory.html">Network engineering</a>
+      <a href="ai-network.html">AI × Network</a>
+      <a href="about.html">About</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <header class="hero">
+    <p class="crumb">Network-engineering advisory</p>
+    <h1 class="serif">25 years on the networks the world runs on — at your service.</h1>
+    <p class="lede">Two ways to use that depth. For a small business, I turn the network decisions you actually face into a simple AI assistant that gives you a straight answer. For operators and infrastructure teams, I take on senior architecture and review as contract work.</p>
+    <div class="cta-row">
+      <a class="cta" href="#talk">Book a 25-minute call</a>
+    </div>
+  </header>
+
+  <section>
+    <p class="kicker">Two tracks</p>
+    <h2 class="serif">Pick the one that fits you.</h2>
+    <div class="tracks">
+
+      <div class="track lead">
+        <span class="badge">For small businesses</span>
+        <h3 class="serif">Network decisions, turned into an AI assistant.</h3>
+        <p>Most small businesses don’t need a network engineer on staff — they need a straight answer to a handful of decisions, without a sales pitch. I build a small assistant that gives you exactly that, grounded in what actually matters for your situation.</p>
+        <ul>
+          <li>Which VPN / secure-access provider should we use, and why</li>
+          <li>Is our internet &amp; connectivity set up sensibly for the size we are</li>
+          <li>Wi-Fi, remote working and basic security — done properly, plainly explained</li>
+          <li>The same anti-fabrication grounding as my AI advisory work</li>
+        </ul>
+        <p class="who">Best for: a 5–100-person business that wants the right call without hiring or guessing.</p>
+        <div class="bot" aria-hidden="true">
+          <div class="bar"><i></i><i></i><i></i><span class="t mono">network-helper</span></div>
+          <div class="body">
+            <div class="q">We’re 20 staff, half remote. Which VPN should we use?</div>
+            <div class="a">For your size and remote split, a managed business VPN with per-user access and MFA fits best — here are two solid options, what each costs, and the one trade-off to watch. I’ll explain the “why” in plain terms.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="track">
+        <span class="badge">For operators</span>
+        <h3 class="serif">Senior architecture &amp; review — contract.</h3>
+        <p>For service providers and infrastructure teams, the deep carrier-grade work: backbone and core design, large migrations, and independent senior review when the stakes are high. Engaged as contract / day-rate, not a fixed product.</p>
+        <ul>
+          <li>Backbone &amp; core architecture (MPLS, BGP, segment routing)</li>
+          <li>Migration planning &amp; de-risking</li>
+          <li>Independent design review &amp; second opinion</li>
+          <li>Vendor-neutral — Cisco, Juniper, Nokia and more</li>
+        </ul>
+        <p class="who">Best for: a carrier, ISP or large infrastructure team that needs proven senior hands.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="cred">
+      <p class="lab">Where this comes from</p>
+      <h2 class="serif">I built and ran the networks for some of the largest operators in the world.</h2>
+      <div class="logos">
+        <span>Sky</span><span>Liberty&nbsp;Global</span><span>Three</span><span>Nokia</span><span>Deutsche&nbsp;Telekom</span><span>KPN</span><span>Comcast</span><span>Meta</span>
+      </div>
+      <p class="certs"><strong>CCIE</strong> #5897 &nbsp;·&nbsp; <strong>JNCIE-SP</strong> #847 &nbsp;·&nbsp; 25 years building Tier-1 networks</p>
+    </div>
+  </section>
+
+  <section id="talk">
+    <div class="talk">
+      <p class="kicker">Talk to me</p>
+      <h2 class="serif">One network decision you’d like settled?</h2>
+      <p>Tell me on a free 25-minute call — whether it’s a VPN choice for a 20-person team or a backbone migration for an operator. I’ll tell you the honest answer and how I’d help.</p>
+      <p style="margin-top:20px"><a class="cta" href="mailto:faz@netfm.co.uk">Book a call</a></p>
+    </div>
+  </section>
+
+  <footer>
+    <p>netfm · Faz Memon · network-engineering advisory · <a href="index.html">back to home</a></p>
+  </footer>
+
+</div>
+</body>
+</html>
