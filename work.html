@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>IntelliPacket — portfolio</title>
+<style>
+  :root{--ink:#ece9e2; --muted:#8b919b; --line:#272b33; --paper:#101216; --accent:#5cb89c; --soft:#161a20; --card:#181b21;}
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--paper); color:var(--ink);
+    font:17px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:880px; margin:0 auto; padding:0 24px}
+  a{color:var(--accent)}
+  p{margin:0 0 12px} strong{font-weight:640}
+
+  .topbar{border-bottom:1px solid var(--line)}
+  .topbar .wrap{display:flex; align-items:center; justify-content:space-between; padding:18px 24px}
+  .brand{display:flex; align-items:center; gap:11px}
+  .brand .mark{width:25px; height:25px; flex:none}
+  .brand .bword{font-size:20px; font-weight:760; letter-spacing:-.025em; color:var(--ink)}
+  .nav{display:flex; gap:24px; font-size:15px}
+  .nav a{color:var(--muted); text-decoration:none} .nav a:hover{color:var(--ink)} .nav a.on{color:var(--ink)}
+
+  .hero{position:relative; overflow:hidden; background:radial-gradient(120% 130% at 84% -15%, #16241f 0%, #101a1c 30%, var(--paper) 62%)}
+  .hero .wrap{padding:64px 24px 20px}
+  .crumb{font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:#7fd3b9; margin:0 0 16px}
+  h1{font-size:33px; line-height:1.16; letter-spacing:-.02em; margin:0 0 16px; font-weight:680; max-width:680px}
+  .lede{font-size:18.5px; line-height:1.55; color:#c7cad1; margin:0; max-width:660px}
+
+  section{padding:26px 0}
+  h2{font-size:13px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin:0 0 18px; font-weight:600}
+  .grid{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+  .card{border:1px solid var(--line); border-radius:11px; padding:18px 20px; background:var(--card)}
+  .card h3{font-size:17px; margin:0 0 7px; letter-spacing:-.01em; display:flex; align-items:center; gap:8px; flex-wrap:wrap}
+  .card p{font-size:14.5px; line-height:1.5; color:#bcc0c8; margin:0}
+  .tag{font-size:11px; font-weight:600; letter-spacing:.03em; text-transform:uppercase; color:var(--muted); border:1px solid var(--line); border-radius:20px; padding:1px 9px}
+  .tag.live{color:#7fd3b9; border-color:#2c5247}
+  @media(max-width:620px){.grid{grid-template-columns:1fr}}
+
+  .foot-cta{border-top:1px solid var(--line); margin-top:14px}
+  .foot-cta .wrap{padding:34px 24px}
+  .cta{display:inline-block; background:var(--accent); color:#08110d; font-weight:640; text-decoration:none; padding:11px 20px; border-radius:8px}
+  footer{padding:34px 0 80px; color:var(--muted); font-size:15px}
+  .draftbar{background:#13212a; border-bottom:1px solid #1d3340; color:#9fc6d6; font-size:13px; text-align:center; padding:7px 12px}
+  .note{font-size:13px; color:var(--muted); font-style:italic}
+</style>
+</head>
+<body>
+<div class="draftbar">Private working draft — IntelliPacket / Portfolio. Not published.</div>
+
+<div class="topbar">
+  <div class="wrap">
+    <span class="brand">
+      <svg class="mark" viewBox="0 0 28 28" aria-hidden="true">
+        <g stroke="#5cb89c" stroke-width="1.4" opacity=".85"><line x1="6" y1="8" x2="20" y2="5"/><line x1="20" y1="5" x2="23" y2="18"/><line x1="23" y1="18" x2="9" y2="22"/><line x1="9" y1="22" x2="6" y2="8"/><line x1="6" y1="8" x2="23" y2="18"/></g>
+        <g fill="#5cb89c"><circle cx="6" cy="8" r="2.6"/><circle cx="20" cy="5" r="2.6"/><circle cx="23" cy="18" r="3.2"/><circle cx="9" cy="22" r="2.6"/></g>
+      </svg>
+      <span class="bword">IntelliPacket</span>
+    </span>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a class="on" href="work.html">Portfolio</a>
+      <a href="about.html">About</a>
+    </nav>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="wrap">
+    <p class="crumb">Portfolio</p>
+    <h1>The products — built, in build, and on the bench.</h1>
+    <p class="lede">Real AI products, not slideware. Some are live, some are in build, some are demos that prove a capability. The work is the argument.</p>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section>
+    <h2 style="color:#7fd3b9">Flagship</h2>
+    <div class="card"><h3>Ask-your-documents (RAG) <span class="tag live">working</span></h3><p>Answers questions from a business's own files, cites the source, and says "not in the documents" rather than guessing. The one most businesses want first.</p></div>
+  </section>
+
+  <section>
+    <h2>Products <span style="text-transform:none;letter-spacing:0;font-weight:400;color:#6b7480">· complete AI products, built and run</span></h2>
+    <div class="grid">
+      <div class="card"><h3>Chip Adviser <span class="tag live">live</span></h3><p>A public AI guide to local fish-and-chip shops, built and run with a partner. Live, with real users.</p></div>
+      <div class="card"><h3>Moonshine — AI investment system <span class="tag">demo</span></h3><p>A multi-agent platform that runs a live investment book — signals → risk → allocation across coordinated agents. Shown here as a safe synthetic demo.</p></div>
+      <div class="card"><h3>AI digital marketer <span class="tag">in dev</span></h3><p>Software that takes a business from offer to landing page to ad angles to leads — done-for-you distribution.</p></div>
+      <div class="card"><h3>Property sourcing tool <span class="tag">early</span></h3><p>Values flats from floor-plans and photos, flags hidden defects, and finds under-priced stock.</p></div>
+      <div class="card"><h3>Complaint / refund pack <span class="tag">concept</span></h3><p>Turns a mess of screenshots, invoices and messages into an organised, evidence-backed complaint pack.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Capability</h2>
+    <div class="card"><h3>Document → structured data <span class="tag">roadmap</span></h3><p>Messy PDFs, invoices and forms turned into a clean spreadsheet — no manual re-keying. A different job from the RAG: it extracts, it doesn't answer.</p></div>
+  </section>
+
+  <section>
+    <h2>The engine</h2>
+    <div class="card"><h3>The operating system <span class="tag">the engine</span></h3><p>The system behind all of it: a work board, persistent memory, agents that check each other, anti-fabrication gates. Not a product you buy — what makes the rest reliable.</p></div>
+    <p class="note" style="margin-top:14px">Status tags are honest: <strong>live</strong> = public and in use · <strong>in dev / early</strong> = being built · <strong>demo</strong> = a safe proof of capability · <strong>concept / roadmap</strong> = next.</p>
+  </section>
+
+  <div class="foot-cta">
+    <div class="wrap">
+      <p style="font-size:18px;color:var(--ink);margin:0 0 14px">Want one of these — or the one job in your business worth doing with AI?</p>
+      <a class="cta" href="mailto:faz@netfm.co.uk">Book a 25-minute call</a>
+      <p style="margin-top:14px"><a href="index.html">← How we work</a></p>
+    </div>
+  </div>
+
+  <footer>
+    <p>IntelliPacket · founded by Faz Memon · a 25-minute call is free.</p>
+  </footer>
+
+</div>
+</body>
+</html>

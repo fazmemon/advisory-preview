@@ -4,173 +4,150 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>netfm — AI &amp; network advisory</title>
+<title>IntelliPacket — AI adoption for small businesses</title>
 <style>
-  :root{
-    --paper:#f4f2ec; --panel:#efece2; --ink:#1b1a16; --ink2:#33312b;
-    --muted:#6f695d; --faint:#928c7e; --line:#ddd8cb; --line2:#e8e4d9;
-    --acc:#c15f3c; --acc-d:#a44c2d; --acc-soft:#f3e3da; --navy:#16304a; --card:#fbfaf5;
-  }
+  :root{--ink:#ece9e2; --muted:#8b919b; --line:#272b33; --paper:#101216; --accent:#5cb89c; --soft:#161a20; --card:#181b21;}
   *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
   body{margin:0; background:var(--paper); color:var(--ink);
-    font:17px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif; -webkit-font-smoothing:antialiased;}
-  .serif{font-family:"Tiempos Headline",Georgia,"Times New Roman",serif}
-  .wrap{max-width:1080px; margin:0 auto; padding:0 30px}
-  a{color:var(--acc); text-decoration:none} a:hover{text-decoration:underline}
-  nav.top{position:sticky; top:0; z-index:10; border-bottom:1px solid var(--line2); background:rgba(244,242,236,.82); backdrop-filter:saturate(140%) blur(10px)}
-  nav.top .wrap{display:flex; align-items:center; justify-content:space-between; padding:16px 30px}
-  .brand{font-weight:800; letter-spacing:-.02em; font-size:19px; color:var(--ink)} .brand b{color:var(--acc)}
-  nav .links{display:flex; gap:26px; font-size:15px}
-  nav .links a{color:var(--muted)} nav .links a:hover{color:var(--ink); text-decoration:none}
-  nav .links a.active{color:var(--ink); font-weight:600}
-  @media(max-width:780px){nav.top .wrap{flex-wrap:wrap; row-gap:11px; padding:12px 20px} nav .links{display:flex; flex-wrap:wrap; width:100%; gap:11px 18px; font-size:14px}}
-  .hero{padding:92px 0 70px; max-width:920px}
-  .eyebrow{font-size:13px; letter-spacing:.16em; text-transform:uppercase; color:var(--acc); font-weight:700; margin:0 0 24px}
-  h1{font-size:clamp(40px,6vw,66px); line-height:1.06; letter-spacing:-.02em; font-weight:560; margin:0 0 26px; color:var(--ink)}
-  .lede{font-size:20px; line-height:1.6; color:var(--ink2); margin:0 0 34px; max-width:720px}
-  .cta-row{display:flex; flex-wrap:wrap; gap:14px; align-items:center}
-  .cta{display:inline-block; font-weight:600; font-size:16px; padding:13px 26px; border-radius:8px; background:var(--acc); color:#fff}
-  .cta:hover{background:var(--acc-d); text-decoration:none}
-  .cta.ghost{background:transparent; color:var(--ink); border:1px solid var(--line)} .cta.ghost:hover{background:var(--panel); border-color:#cdc7b8}
-  section{padding:70px 0; border-top:1px solid var(--line2)}
-  .kicker{font-size:13px; letter-spacing:.16em; text-transform:uppercase; color:var(--acc); font-weight:700; margin:0 0 16px}
-  h2{font-size:clamp(28px,3.6vw,40px); line-height:1.14; letter-spacing:-.018em; font-weight:560; margin:0 0 18px; color:var(--ink)}
-  .sub{font-size:18px; color:var(--muted); margin:0 0 40px; max-width:680px}
-  p{margin:0 0 14px} strong{font-weight:650; color:var(--ink2)}
-  .svc{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
-  .svc .col{display:flex; flex-direction:column; border:1px solid var(--line); border-radius:16px; padding:28px 26px 24px; background:var(--card); transition:.15s}
-  .svc .col:hover{border-color:#cdbcae; box-shadow:0 12px 34px -20px rgba(60,40,20,.35); transform:translateY(-3px)}
-  .svc .num{font-size:13px; letter-spacing:.1em; color:var(--faint); margin:0 0 14px}
-  .svc h3{font-size:22px; line-height:1.18; letter-spacing:-.01em; margin:0 0 10px; color:var(--ink)}
-  .svc .col > p{font-size:15.5px; color:var(--muted); margin:0 0 16px}
-  .svc ul{list-style:none; margin:0 0 20px; padding:0}
-  .svc li{font-size:14.5px; color:var(--ink2); padding:7px 0 7px 22px; position:relative; border-top:1px solid var(--line2)}
-  .svc li:first-child{border-top:none}
-  .svc li::before{content:""; position:absolute; left:2px; top:14px; width:7px; height:7px; border-radius:50%; background:var(--acc)}
-  .svc .go{margin-top:auto; font-weight:600; font-size:15px; color:var(--acc)}
-  @media(max-width:860px){.svc{grid-template-columns:1fr}}
-  .cred{background:var(--navy); color:#eaf0f5; border-radius:18px; padding:46px 40px; text-align:center}
-  .cred .lab{font-size:13px; letter-spacing:.18em; text-transform:uppercase; color:#8fb0cb; margin:0 0 8px}
-  .cred h2{color:#fff; font-size:clamp(24px,3vw,32px); margin:0 0 26px; max-width:640px; margin-left:auto; margin-right:auto}
-  .logos{display:flex; flex-wrap:wrap; justify-content:center; gap:16px 34px; margin:0 0 26px}
-  .logos span{font-size:20px; font-weight:700; letter-spacing:-.01em; color:#dbe6ef; opacity:.9}
-  .cred .certs{font-size:14px; color:#8fb0cb} .cred .certs strong{color:#eaf0f5}
-  .proof{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
-  .proof .p{border:1px solid var(--line); border-radius:14px; padding:20px 22px; background:var(--card)}
-  .proof .p h3{font-size:16.5px; margin:0 0 7px; color:var(--ink)} .proof .p p{font-size:14px; color:var(--muted); margin:0}
-  .tag{display:inline-block; font-size:10.5px; letter-spacing:.04em; text-transform:uppercase; color:var(--acc); border:1px solid #e3c3b5; background:var(--acc-soft); border-radius:20px; padding:1px 8px; margin-left:7px; vertical-align:middle}
-  @media(max-width:760px){.proof{grid-template-columns:1fr}}
-  .talk{border:1px solid var(--line); border-radius:18px; padding:46px 40px; background:linear-gradient(180deg,var(--acc-soft),var(--card))}
-  .talk h2{margin-bottom:12px} .talk p{color:var(--ink2); max-width:580px}
-  footer{padding:42px 0 90px; color:var(--faint); font-size:14px; border-top:1px solid var(--line2)}
-  .draftbar{background:#f6eccf; border-bottom:1px solid #e3d39f; color:#6b5a1f; font-size:12.5px; text-align:center; padding:7px 12px}
-  .note{font-size:13px; color:var(--faint); font-style:italic}
+    font:17px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:880px; margin:0 auto; padding:0 24px}
+  header{padding:70px 0 10px}
+  .eyebrow{font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin:0 0 16px}
+  h1{font-size:34px; line-height:1.16; letter-spacing:-.02em; margin:0 0 16px; font-weight:680}
+  .lede{font-size:19px; line-height:1.5; color:#c7cad1; margin:0; max-width:680px}
+  section{padding:36px 0; border-top:1px solid var(--line)}
+  h2{font-size:14px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin:0 0 20px; font-weight:600}
+  p{margin:0 0 12px} .muted{color:var(--muted)} strong{font-weight:640} a{color:var(--accent)}
+  .grid{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+  .card{border:1px solid var(--line); border-radius:11px; padding:18px 20px; background:var(--card)}
+  .card h3{font-size:17px; margin:0 0 6px; letter-spacing:-.01em}
+  .card p{font-size:15px; line-height:1.5; color:#bcc0c8; margin:0}
+  .tag{display:inline-block; font-size:11.5px; color:var(--muted); border:1px solid var(--line); border-radius:20px; padding:1px 9px; margin-left:6px; vertical-align:middle; letter-spacing:.02em}
+  .rungs{display:grid; gap:10px}
+  .rung{display:flex; justify-content:space-between; gap:16px; border-bottom:1px solid var(--line); padding:0 0 10px}
+  .rung:last-child{border-bottom:none}
+  .rung .price{color:var(--accent); font-weight:620; white-space:nowrap}
+  .creds{columns:2; column-gap:28px; font-size:15px; color:#bcc0c8}
+  .creds div{margin:0 0 7px; break-inside:avoid}
+  .agent{background:var(--soft); border:1px solid #2b3a34; border-radius:11px; padding:20px 22px}
+  footer{padding:36px 0 80px; color:var(--muted); font-size:15px}
+  .draftbar{background:#13212a; border-bottom:1px solid #1d3340; color:#9fc6d6; font-size:13px; text-align:center; padding:7px 12px}
+  .note{font-size:13px; color:var(--muted); font-style:italic}
+  .who{font-size:13px; color:var(--accent); margin:9px 0 0}
+  @media(max-width:620px){.grid{grid-template-columns:1fr} .creds{columns:1}}
+  /* hero network graphic */
+  .hero{position:relative; overflow:hidden; background:radial-gradient(120% 130% at 84% -15%, #16241f 0%, #101a1c 30%, var(--paper) 62%)}
+  .hero .wrap{position:relative; z-index:2; padding-top:76px; padding-bottom:60px}
+  .hero-text{max-width:600px}
+  .hero .eyebrow{color:#7fd3b9}
+  .netgfx{position:absolute; top:0; bottom:0; right:-20px; width:660px; max-width:64%; z-index:1; pointer-events:none;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 48%); mask-image:linear-gradient(90deg,transparent 0%,#000 48%)}
+  .netgfx svg{width:100%; height:100%; display:block}
+  .netgfx line{stroke:var(--accent); stroke-width:1; opacity:.20}
+  .netgfx circle{fill:var(--accent); opacity:.6}
+  .netgfx .halo{opacity:.13}
+  .netgfx .hub{opacity:.92; animation:netpulse 4.2s ease-in-out infinite}
+  .netgfx .hub.b{animation-delay:1.4s} .netgfx .hub.c{animation-delay:2.8s}
+  @keyframes netpulse{0%,100%{opacity:.5} 50%{opacity:1}}
+  @media(max-width:820px){.netgfx{max-width:96%; right:-160px; opacity:.34}}
+  .brandbar{display:flex; align-items:center; justify-content:space-between; gap:16px; margin:0 0 44px}
+  .nav{display:flex; gap:22px; font-size:15px}
+  .nav a{color:var(--muted); text-decoration:none} .nav a:hover{color:var(--ink)} .nav a.on{color:var(--ink)}
+  .brand{display:flex; align-items:center; gap:11px; margin:0}
+  .brand .mark{width:27px; height:27px; flex:none}
+  .brand .bword{font-size:22px; font-weight:760; letter-spacing:-.025em; color:var(--ink)}
+  .brand .btag{font-size:13px; color:var(--muted); letter-spacing:.04em; text-transform:uppercase; border-left:1px solid var(--line); padding-left:12px}
 </style>
 </head>
 <body>
-<div class="draftbar">Private working draft. Not published.</div>
-
-<nav class="top">
-  <div class="wrap">
-    <span class="brand">net<b>fm</b></span>
-    <div class="links">
-      <a class="active" href="index.html">Home</a>
-      <a href="ai-advisory.html">AI advisory</a>
-      <a href="network-advisory.html">Network engineering</a>
-      <a href="ai-network.html">AI × Network</a>
-      <a href="about.html">About</a>
-    </div>
-  </div>
-</nav>
-
+<div class="draftbar">Private working draft — IntelliPacket. Not published.</div>
 <div class="wrap">
 
-  <header class="hero">
-    <p class="eyebrow">netfm · AI &amp; network advisory</p>
-    <h1 class="serif">Senior advisory for AI — and the networks it runs on.</h1>
-    <p class="lede">I set businesses up on the internet in the 1990s, spent 25 years building the Tier-1 networks the world runs on, and got AI-native at Meta. Today I help businesses use AI for real, reliable work — and I help operators build their networks properly. Two kinds of hard-won depth, one standard: the real thing, handed over, no slop.</p>
-    <div class="cta-row">
-      <a class="cta" href="#services">Explore the practice</a>
-      <a class="cta ghost" href="#talk">Book a 25-minute call</a>
+  <div class="hero">
+    <div class="netgfx" aria-hidden="true">
+      <svg viewBox="0 0 600 460" preserveAspectRatio="xMidYMid meet">
+        <g class="edges">
+          <line x1="80" y1="70" x2="175" y2="40"/><line x1="175" y1="40" x2="290" y2="90"/>
+          <line x1="290" y1="90" x2="410" y2="55"/><line x1="410" y1="55" x2="520" y2="120"/>
+          <line x1="290" y1="90" x2="235" y2="150"/><line x1="235" y1="150" x2="130" y2="160"/>
+          <line x1="130" y1="160" x2="80" y2="70"/><line x1="235" y1="150" x2="350" y2="190"/>
+          <line x1="350" y1="190" x2="290" y2="90"/><line x1="350" y1="190" x2="470" y2="225"/>
+          <line x1="470" y1="225" x2="520" y2="120"/><line x1="470" y1="225" x2="525" y2="300"/>
+          <line x1="350" y1="190" x2="210" y2="260"/><line x1="235" y1="150" x2="210" y2="260"/>
+          <line x1="210" y1="260" x2="90" y2="280"/><line x1="90" y1="280" x2="60" y2="400"/>
+          <line x1="90" y1="280" x2="180" y2="370"/><line x1="210" y1="260" x2="320" y2="300"/>
+          <line x1="320" y1="300" x2="350" y2="190"/><line x1="320" y1="300" x2="430" y2="330"/>
+          <line x1="430" y1="330" x2="470" y2="225"/><line x1="430" y1="330" x2="410" y2="420"/>
+          <line x1="320" y1="300" x2="300" y2="400"/><line x1="180" y1="370" x2="300" y2="400"/>
+          <line x1="300" y1="400" x2="410" y2="420"/><line x1="430" y1="330" x2="525" y2="300"/>
+          <line x1="130" y1="160" x2="90" y2="280"/><line x1="180" y1="370" x2="210" y2="260"/>
+        </g>
+        <circle class="halo" cx="290" cy="90" r="15"/><circle class="halo" cx="470" cy="225" r="15"/><circle class="halo" cx="235" cy="150" r="15"/>
+        <g class="nodes">
+          <circle cx="80" cy="70" r="3"/><circle cx="175" cy="40" r="2.6"/><circle cx="410" cy="55" r="2.6"/>
+          <circle cx="520" cy="120" r="3"/><circle cx="350" cy="190" r="3"/><circle cx="130" cy="160" r="2.6"/>
+          <circle cx="90" cy="280" r="3"/><circle cx="210" cy="260" r="3"/><circle cx="320" cy="300" r="3"/>
+          <circle cx="430" cy="330" r="3"/><circle cx="525" cy="300" r="2.6"/><circle cx="180" cy="370" r="2.6"/>
+          <circle cx="300" cy="400" r="3"/><circle cx="410" cy="420" r="2.6"/><circle cx="60" cy="400" r="2.6"/>
+        </g>
+        <circle class="hub" cx="290" cy="90" r="6"/><circle class="hub b" cx="470" cy="225" r="6"/><circle class="hub c" cx="235" cy="150" r="6"/>
+      </svg>
     </div>
-  </header>
+    <div class="wrap">
+      <div class="brandbar">
+        <div class="brand">
+          <svg class="mark" viewBox="0 0 28 28" aria-hidden="true">
+            <g stroke="#5cb89c" stroke-width="1.4" opacity=".85"><line x1="6" y1="8" x2="20" y2="5"/><line x1="20" y1="5" x2="23" y2="18"/><line x1="23" y1="18" x2="9" y2="22"/><line x1="9" y1="22" x2="6" y2="8"/><line x1="6" y1="8" x2="23" y2="18"/></g>
+            <g fill="#5cb89c"><circle cx="6" cy="8" r="2.6"/><circle cx="20" cy="5" r="2.6"/><circle cx="23" cy="18" r="3.2"/><circle cx="9" cy="22" r="2.6"/></g>
+          </svg>
+          <span class="bword">IntelliPacket</span>
+          <span class="btag">AI adoption for SMEs</span>
+        </div>
+        <nav class="nav">
+          <a class="on" href="index.html">Home</a>
+          <a href="work.html">Portfolio</a>
+          <a href="about.html">About</a>
+        </nav>
+      </div>
+      <div class="hero-text">
+        <h1>IntelliPacket helps small businesses actually use AI.</h1>
+        <p class="lede">Most small businesses don't need a full AI department — just the right packet of it. IntelliPacket picks the one job worth doing, builds it on a system you can trust, and leaves your team running it.</p>
+      </div>
+    </div>
+  </div>
 
-  <section id="services">
-    <p class="kicker">What I do</p>
-    <h2 class="serif">Three ways I work with you.</h2>
-    <p class="sub">Each is its own practice with its own page. Start wherever your problem is.</p>
-    <div class="svc">
-      <div class="col">
-        <p class="num">01</p>
-        <h3 class="serif">AI advisory</h3>
-        <p>Get your business producing reliable work with AI — set up around one real output, proven, and handed to your team.</p>
-        <ul>
-          <li>One trusted output or workflow, not a chatbot</li>
-          <li>Your nominated person runs it after I leave</li>
-          <li>Fixed price from £2,500 · no retainer</li>
-        </ul>
-        <a class="go" href="ai-advisory.html">Explore AI advisory →</a>
-      </div>
-      <div class="col">
-        <p class="num">02</p>
-        <h3 class="serif">Network-engineering advisory</h3>
-        <p>25 years on Tier-1 carrier and service-provider networks — the kind the biggest operators in the world run on.</p>
-        <ul>
-          <li>Backbone, core &amp; MPLS/BGP architecture</li>
-          <li>Migration planning &amp; independent senior review</li>
-          <li>Sky · Liberty Global · Three · Nokia/DT · KPN</li>
-        </ul>
-        <a class="go" href="network-advisory.html">Explore network advisory →</a>
-      </div>
-      <div class="col">
-        <p class="num">03</p>
-        <h3 class="serif">AI × network engineering</h3>
-        <p>Where the two meet: AI applied to network and infrastructure problems, with the judgment to know what’s worth automating.</p>
-        <ul>
-          <li>Measurement &amp; anomaly detection</li>
-          <li>“Did this change actually work?” analysis</li>
-          <li>A combination very few people can offer</li>
-        </ul>
-        <a class="go" href="ai-network.html">Explore AI × network →</a>
-      </div>
+  <section>
+    <h2>What we build</h2>
+    <div class="grid">
+      <div class="card"><h3>Ask-your-documents (RAG) <span class="tag">working</span></h3><p>Answers questions from a business's own files, cites the source, and says "not in the documents" rather than guessing. The one most businesses want first.</p></div>
+      <div class="card"><h3>Chip Adviser <span class="tag">live</span></h3><p>A public AI guide to local fish-and-chip shops, built and run with a partner.</p></div>
+      <div class="card"><h3>AI digital marketer <span class="tag">in dev</span></h3><p>Software that takes a business from offer to landing page to ad angles to leads.</p></div>
+      <div class="card"><h3>The operating system <span class="tag">the engine</span></h3><p>The system behind all of it: a work board, persistent memory, agents that check each other, anti-fabrication gates.</p></div>
     </div>
+    <p class="note" style="margin-top:14px">A few of the products — see the full <a href="work.html">product board →</a></p>
   </section>
 
   <section>
-    <div class="cred">
-      <p class="lab">The scale behind the advice</p>
-      <h2 class="serif">For 25 years I built the networks the internet runs on.</h2>
-      <div class="logos">
-        <span>Sky</span><span>Liberty&nbsp;Global</span><span>Three</span><span>Nokia</span><span>Deutsche&nbsp;Telekom</span><span>KPN</span><span>Comcast</span><span>Meta</span>
-      </div>
-      <p class="certs"><strong>CCIE</strong> #5897 &nbsp;·&nbsp; <strong>JNCIE-SP</strong> #847 &nbsp;·&nbsp; Meta — rated <strong>AI-native</strong></p>
+    <h2>How we work</h2>
+    <p>IntelliPacket takes one real piece of work your team needs, sets up the system to produce it reliably, and hands it over so your nominated person can run it. No maintenance, no retainer — you own it.</p>
+    <div class="rungs">
+      <div class="rung"><span>One output, produced and handed over</span><span class="price">£2,500</span></div>
+      <div class="rung"><span>One recurring workflow, full setup + owner handover</span><span class="price">£6,000</span></div>
+      <div class="rung"><span>One end-to-end project + a reusable pack your team keeps</span><span class="price">£12,000</span></div>
     </div>
+    <p class="note" style="margin-top:12px">Ex-VAT, fixed, on a free 25-minute call.</p>
   </section>
 
   <section>
-    <p class="kicker">Proof</p>
-    <h2 class="serif">Real things I’ve shipped.</h2>
-    <p class="sub">The work is the argument — built, not mocked up.</p>
-    <div class="proof">
-      <div class="p"><h3>RAG assistant <span class="tag">demo</span></h3><p>An assistant on your own documents that cites sources and refuses to guess. The output most businesses want first.</p></div>
-      <div class="p"><h3>Chip Adviser <span class="tag">live</span></h3><p>A live, public AI product — built and run end-to-end with a partner. Real users, real reviews.</p></div>
-      <div class="p"><h3>Multi-agent trading system <span class="tag">demo</span></h3><p>A live platform I built and run, shown as a safe synthetic demo: many AI steps coordinated reliably.</p></div>
-    </div>
-    <p class="note" style="margin-top:16px">Draft — proof set will be trimmed and the Meta / trading wording signed off before anything’s public.</p>
-  </section>
-
-  <section id="talk">
-    <div class="talk">
-      <p class="kicker">Talk to me</p>
-      <h2 class="serif">Tell me the one problem worth solving.</h2>
-      <p>A 25-minute call is free — whether it’s an AI output you can’t trust yet or a network decision you need a senior pair of eyes on. I’ll tell you straight whether it’s a fit, and what it would take.</p>
-      <p style="margin-top:20px"><a class="cta" href="mailto:faz@netfm.co.uk">Book a call</a></p>
+    <h2>Ask the assistant</h2>
+    <div class="agent">
+      <p style="margin:0 0 8px"><strong>A live assistant, trained on IntelliPacket's work.</strong> Ask it what we build, how we work, and whether your problem fits — it answers from the facts and draws the line when something becomes paid work. It's also a small live demo of what we do.</p>
+      <p class="note" style="margin:0">[ Coming back in — needs a small backend, not on this static draft. The earlier version (serve.py) is the starting point. ]</p>
     </div>
   </section>
 
   <footer>
-    <p>netfm · Faz Memon · AI &amp; network advisory · a 25-minute call is free.</p>
+    <p>IntelliPacket · founded by Faz Memon · a 25-minute call is free.</p>
   </footer>
 
 </div>
